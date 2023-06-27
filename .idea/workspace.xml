@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="20657c7d-8de3-419c-8916-0fe7bd465d83" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ToDoApp/AddTask.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ToDoApp/CircleButton.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ToDoApp/HeaderHeadline.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ToDoApp/Task.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ToDoApp/ToDoHeader.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ToDoApp/ToDoPageView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ToDoApp/UserTaskTable.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/element-plus/button.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/element-plus/checkbox.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/element-plus/date-picker.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/element-plus/form-item.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/element-plus/form.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/element-plus/import.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/element-plus/input.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/Battle.net-Setup.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/Detection.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/KubusCringMaker.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/blueDiamond.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/club.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/diamond.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/heart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/scoped_dir12672_1515049284/Detection.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/scoped_dir12672_2040864598/Battle.net-Setup.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/scoped_dir12672_508222848/Detection.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/css/images/spade.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/element-plus-proxy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/element-plus/date-picker.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/element-plus/modifiable-dropdown-list.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/element-plus/pk-button.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/core/components/element-plus/pk-check-box.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend" beforeDir="false" afterPath="$PROJECT_DIR$/frontend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/frontend" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2RjqUOs2h6sEdyLZF2bI0CUTDzY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/WorkSpace/Repositiories/LearningProjects/to-do-list-juno/frontend/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;D:\\WorkSpace\\Repositiories\\LearningProjects\\to-do-list-juno\\frontend\\node_modules\\prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\WorkSpace\\Repositiories\\LearningProjects\\to-do-list-juno\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WorkSpace\Repositiories\LearningProjects\to-do-list-juno\frontend\src" />
+      <recent name="D:\WorkSpace\Repositiories\LearningProjects\to-do-list-juno\frontend\src\components" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="20657c7d-8de3-419c-8916-0fe7bd465d83" name="Changes" comment="" />
+      <created>1687773854710</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687773854710</updated>
+      <workItem from="1687773855727" duration="259000" />
+      <workItem from="1687774134047" duration="3273000" />
+      <workItem from="1687870688118" duration="8280000" />
+      <workItem from="1687885265473" duration="307000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
