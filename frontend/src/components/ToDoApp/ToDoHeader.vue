@@ -20,7 +20,7 @@ import HeaderHeadline from "@/components/ToDoApp/HeaderHeadline.vue";
 .ToDoHeader {
     width: 100%;
     height: 80px;
-    background: green;
+    background: black;
     display: flex;
 
     &__circles {
@@ -37,7 +37,5 @@ import HeaderHeadline from "@/components/ToDoApp/HeaderHeadline.vue";
         align-items: center;
         flex: 2 1;
     }
-
-
 }
 </style>

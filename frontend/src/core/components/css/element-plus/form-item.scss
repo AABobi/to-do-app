@@ -1,7 +1,9 @@
 .el-form-item {
   display: flex;
-  font-family: Roboto;
-  margin-bottom: 0 !important;
   height: 25px;
-  margin-top: 20px;
+  margin: 5px 0 5px 0;
+   &__label {
+     font-weight: bold;
+     font-family: Roboto;
+   }
 }

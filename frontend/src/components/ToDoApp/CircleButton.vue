@@ -1,6 +1,5 @@
 <template>
     <div class="CircleButton">
-
     </div>
 </template>
 
@@ -12,6 +11,6 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: blue;
+    background-color: white;
 }
 </style>

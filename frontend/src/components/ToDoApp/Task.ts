@@ -8,6 +8,6 @@ export enum Category {
 export interface Task {
     taskDescription: string,
     category?: Category
-    date?: Date,
+    date?: string,
     location?: string
 }

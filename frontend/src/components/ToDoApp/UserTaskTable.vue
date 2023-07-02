@@ -3,7 +3,6 @@
   <div v-for="list in store.taskArray">
      <UserTask :user-task="list"></UserTask>
   </div>
-  <button @click="t">test</button>
  </div>
 </template>
 
@@ -17,42 +16,28 @@ onMounted(()=>{
  if(localStorage.length === 0) {
   return;
  }
-
  for(let i = 0; i < localStorage.length; i++) {
   const localStorageItemKey = localStorage.key(i);
   if(localStorageItemKey) {
    const localStorageItem = localStorage.getItem(localStorageItemKey);
    if(localStorageItem) {
+    if(!store.taskArray) {
+     let test: Task[] = []
+     store.taskArray = test;
+    }
     store.taskArray.push(JSON.parse(localStorageItem));
    }
   }
- }`
- `
-})
-
-const store = toDoAppStore();
-
-const qwe = ref(["a","b"])
-const test = ref([]);
-
-const t = () => {
- let date: Date = new Date();
- let a: Task = {
-  taskDescription: "test",
-  category: Category.normal,
-  date: date,
-  location: 'asd'+ localStorage.length.toString()
  }
- localStorage.setItem(localStorage.length.toString(), JSON.stringify(a))
-}
-
+})
+const store = toDoAppStore();
 </script>
 
 <style scoped lang="scss">
 .UserTaskTable {
     width: 80%;
     height: 300px;
-    background: red;
+    background: navajowhite;
  overflow: auto;
 }
 </style>

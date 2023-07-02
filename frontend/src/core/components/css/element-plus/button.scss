@@ -3,4 +3,12 @@
   cursor: pointer;
   width: 100%;
   text-transform: uppercase;
+  border: black solid 2px;
+  font-weight: bold;
+  color: black;
+  margin-right: 5px;
+  padding-right: 5px;
+  +.el-button {
+    margin: 0;
+  }
 }

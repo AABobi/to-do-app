@@ -12,9 +12,7 @@
 import ToDoHeader from "@/components/ToDoApp/ToDoHeader.vue";
 import AddTask from "@/components/ToDoApp/AddTask.vue";
 import UserTaskTable from "@/components/ToDoApp/UserTaskTable.vue";
-import {computed, ref} from "vue";
-
-const emit = defineEmits(['rolledUp'])
+import { computed, ref } from "vue";
 
 const classes = computed( () => ({
     "ToDoPageView__mainBox": true,
@@ -25,11 +23,6 @@ const rolledUp = ref(true)
 const expandMenu = (event: any) => {
     rolledUp.value = event;
 }
-
-/*const expandMenu = ( (event)=> {
-    console.log(event);
-    return event;
-})*/
 </script>
 
 <style scoped lang="scss">
@@ -40,7 +33,7 @@ const expandMenu = (event: any) => {
      &__mainBox {
          width: 800px;
          height: 550px;
-         background: cadetblue;
+         background: #f0eeeb;
          transition: height 0.3s ease;
          &--increaseHeight {
              height: 600px;

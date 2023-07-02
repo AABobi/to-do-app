@@ -1,14 +1,14 @@
 <template>
     <MyForm :class="formClasses" label-position="top">
-        <MyFormItem style="height: 100%" label="CREATE NEW TASK">
+        <MyFormItem label="CREATE NEW TASK">
             <div :class="containerClasses">
-                <PkInput class="AddTask__taskTextInput" v-model="description"></PkInput>
+                <PkInput class="AddTask__taskDescription" v-model="task.taskDescription"></PkInput>
                 <PkButton  class="AddTask__addTask" @click="addTask">ADD</PkButton>
-                <PkButton @click="expandAddTaskMenu" v-if="rolledUp" class="AddTask__belowTaskInputElement">MORE DETAILS</PkButton>
+                <PkButton class="AddTask__moreDetails" @click="expandAddTaskMenu" v-if="rolledUp" >MORE DETAILS</PkButton>
                 <PkSelect
                     v-if="!rolledUp"
-                    class="AddTask__belowTaskInputElement"
-                    v-model="category"
+                    class="AddTask__category"
+                    v-model="task.category"
                 >
                     <PkOption
                         v-for="item in options"
@@ -16,48 +16,59 @@
                     ></PkOption>
                 </PkSelect>
 
-                <DatePicker v-model="dateValue" v-if="!rolledUp" class="AddTask__dateInput"></DatePicker>
-                <PkInput v-if="!rolledUp" v-model="location" class="AddTask__location"></PkInput>
+                <DatePicker v-model="task.date" v-if="!rolledUp" class="AddTask__dateInput"></DatePicker>
+                <PkInput v-if="!rolledUp" v-model="task.location" class="AddTask__location"></PkInput>
             </div>
         </MyFormItem>
     </MyForm>
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
-import { PkButton, MyFormItem, MyForm, PkCheckBox, PkInput, ModifiableDropdownList, PkSelect, PkOption } from "@/core/components/element-plus-proxy";
+import { computed, ref } from "vue";
+import { PkButton, MyFormItem, MyForm, PkInput, PkSelect, PkOption } from "@/core/components/element-plus-proxy";
 import DatePicker from "@/core/components/element-plus/date-picker.vue";
-import {Category, Task} from "@/components/ToDoApp/Task";
+import { Category, Task } from "@/components/ToDoApp/Task";
+import { toDoAppStore } from "@/components/ToDoApp/ToDoAppStore";
 
 const emit = defineEmits(["rolledUp"])
-
-const value = ref('')
-const dateValue =ref()
-const location = ref();
-const description = ref();
-const category = ref();
-const task = ref<Task>();
+const store = toDoAppStore();
 const options = ref<Category[]>([Category.normal,Category.important,Category.minor])
 
-const taskArray = ref();
-
+const task = ref<Task>({
+    taskDescription: '',
+    category: undefined,
+    date: undefined,
+    location: undefined
+})
 const addTask = () =>{
-    task.value = {
-        taskDescription: description.value,
-        date: dateValue.value,
-        category: category.value,
-        location: location.value
+    if(!store.taskArray) {
+        store.taskArray = [];
     }
-
-  console.log();
+    task.value.date = convertToCustomDate(task.value.date);
+    store.taskArray.push(task.value);
+    task.value = {
+      taskDescription: '',
+      category: undefined,
+      date: undefined,
+      location: undefined
+    }
+    rolledUp.value = true;
+    store.sortArray();
 }
-
+function convertToCustomDate(dateString: string | undefined) {
+    if(!dateString) {
+        return undefined;
+    }
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day.toString().padStart(2, '0')}.${month.toString().padStart(2, '0')}.${year}`;
+}
 const rolledUp = ref(true);
 const expandAddTaskMenu = () => {
     rolledUp.value = !rolledUp.value;
-    console.log(rolledUp.value);
     emit("rolledUp", rolledUp.value)
-    //console.log(optionalCategory.value[0]);
 }
 
 const formClasses = computed( () => ({
@@ -73,17 +84,16 @@ const containerClasses = computed( () => ({
 </script>
 <style lang="scss">
 .AddTask {
+    margin: 10px 0 0 10px;
     display: flex;
-    //justify-content: center;
-  //  align-items: center;
     flex-direction: column;
     background: #f0eeeb;
-    width: 50%;
+    width: 400px;
     height: 150px;
     transition: 0.3s ease;
+
     .el-form-item__label {
         margin-left: 10px;
-
     }
     &__container {
         display: grid;
@@ -92,33 +102,36 @@ const containerClasses = computed( () => ({
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: auto;
             grid-template-areas:
-            "input input addTaskButton"
-            "belowTaskInputElement . ."
+            "taskDescription taskDescription addTaskButton ."
+            "moreDetails . . ."
         }
         &--expanded {
             grid-template-columns: 3fr 1fr 1fr 1fr;
             grid-template-rows: auto;
             grid-template-areas:
-               "input . . ."
-               "belowTaskInputElement date date date"
-               "location . . ."
+               "taskDescription taskDescription . ."
+               "category category date date"
+               "location location . ."
                ". . addTaskButton addTaskButton"
         }
     }
-    &__taskTextInput {
-        grid-area: input;
+    &__taskDescription {
+        grid-area: taskDescription;
         width: 50px;
-        margin-left: 5px;
     }
 
-    &__belowTaskInputElement {
-        grid-area: belowTaskInputElement;
+    &__category {
+        grid-area: category;
+    }
+
+    &__moreDetails {
+        grid-area: moreDetails;
     }
 
     &__addTask {
         grid-area: addTaskButton;
-        margin: 0 25px 0 5px;
     }
+
     &__dateInput {
         grid-area: date;
     }
@@ -128,7 +141,7 @@ const containerClasses = computed( () => ({
     }
 
     &__expandCreateTaskArea {
-        height: 200px;
+        height: 163px;
         width: 60%;
         transition: 0.3s ease;
     }
