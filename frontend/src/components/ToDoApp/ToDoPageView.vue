@@ -36,7 +36,7 @@ const expandMenu = (event: any) => {
          background: #f0eeeb;
          transition: height 0.3s ease;
          &--increaseHeight {
-             height: 600px;
+             height: 565px;
              transition: height 0.3s ease;
          }
      }
