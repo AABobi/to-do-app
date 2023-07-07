@@ -1,43 +1,40 @@
 <template>
- <div class="UserTaskTable">
-  <div v-for="list in store.taskArray">
-     <UserTask :user-task="list"></UserTask>
+  <div class="UserTaskTable">
+    <div v-for="list in store.taskArray">
+      <UserTask
+        class="UserTaskTable__task"
+        :user-task="list"
+        @click="removeTask(list)"
+      ></UserTask>
+    </div>
   </div>
- </div>
 </template>
 
 <script setup lang="ts">
 import UserTask from "@/components/ToDoApp/UserTask.vue";
-import {computed, onMounted, ref, watch} from "vue";
-import {Category, Task} from "@/components/ToDoApp/Task";
-import {toDoAppStore} from "@/components/ToDoApp/ToDoAppStore";
+import { toDoAppStore } from "@/components/ToDoApp/ToDoAppStore";
+import { Task } from "@/components/ToDoApp/Task";
 
-onMounted(()=>{
- if(localStorage.length === 0) {
-  return;
- }
- for(let i = 0; i < localStorage.length; i++) {
-  const localStorageItemKey = localStorage.key(i);
-  if(localStorageItemKey) {
-   const localStorageItem = localStorage.getItem(localStorageItemKey);
-   if(localStorageItem) {
-    if(!store.taskArray) {
-     let test: Task[] = []
-     store.taskArray = test;
-    }
-    store.taskArray.push(JSON.parse(localStorageItem));
-   }
-  }
- }
-})
 const store = toDoAppStore();
+const removeTask = (list: Task) => {
+  store.taskArray = store.taskArray.filter((item) => item !== list);
+
+  //This is horrible, but there is no normal back just localStorage
+  localStorage.clear();
+  for (let obj of store.taskArray) {
+    localStorage.setItem(localStorage.length.toString(), JSON.stringify(obj));
+  }
+};
 </script>
 
 <style scoped lang="scss">
 .UserTaskTable {
-    width: 80%;
-    height: 300px;
-    background: navajowhite;
- overflow: auto;
+  width: 80%;
+  height: 300px;
+  background: navajowhite;
+  overflow: auto;
+  &__task {
+    cursor: pointer;
+  }
 }
 </style>

@@ -1,150 +1,152 @@
 <template>
-    <MyForm :class="formClasses" label-position="top">
-        <MyFormItem label="CREATE NEW TASK">
-            <div :class="containerClasses">
-                <PkInput class="AddTask__taskDescription" v-model="task.taskDescription"></PkInput>
-                <PkButton  class="AddTask__addTask" @click="addTask">ADD</PkButton>
-                <PkButton class="AddTask__moreDetails" @click="expandAddTaskMenu" v-if="rolledUp" >MORE DETAILS</PkButton>
-                <PkSelect
-                    v-if="!rolledUp"
-                    class="AddTask__category"
-                    v-model="task.category"
-                >
-                    <PkOption
-                        v-for="item in options"
-                        :value="item"
-                    ></PkOption>
-                </PkSelect>
+  <MyForm label-position="top" :class="formClasses">
+    <div>
+      <MyFormItem label="DESCRIPTION" class="AddTask__taskDescription">
+        <PkInput v-model="task.taskDescription"></PkInput>
+      </MyFormItem>
+      <MyFormItem v-if="rolledUp">
+        <MyButton @click="expandAddTaskMenuSize(false)">MORE DETAILS</MyButton>
+      </MyFormItem>
+      <MyFormItem
+        v-if="!rolledUp"
+        label="CATEGORY"
+        class="AddTask__categoryForm"
+      >
+        <PkSelect
+          class="AddTask__categoryForm--categoryOptions"
+          v-model="task.category"
+        >
+          <PkOption v-for="item in Category" :value="item"></PkOption>
+        </PkSelect>
+      </MyFormItem>
 
-                <DatePicker v-model="task.date" v-if="!rolledUp" class="AddTask__dateInput"></DatePicker>
-                <PkInput v-if="!rolledUp" v-model="task.location" class="AddTask__location"></PkInput>
-            </div>
-        </MyFormItem>
-    </MyForm>
+      <MyFormItem v-if="!rolledUp" label="LOCATION" class="AddTask__location">
+        <PkInput v-model="task.location"></PkInput>
+      </MyFormItem>
+    </div>
+    <div class="AddTask__secondColumn">
+      <MyFormItem v-if="!rolledUp" class="AddTask__dateInput">
+        <MyDatePicker v-model="task.date"></MyDatePicker>
+      </MyFormItem>
+      <MyFormItem v-if="!rolledUp">
+        <MyButton @click="addTask()">add</MyButton>
+      </MyFormItem>
+      <MyFormItem class="AddTask__addTask" v-if="rolledUp">
+        <MyButton @click="addTask()">add</MyButton>
+      </MyFormItem>
+    </div>
+  </MyForm>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { PkButton, MyFormItem, MyForm, PkInput, PkSelect, PkOption } from "@/core/components/element-plus-proxy";
-import DatePicker from "@/core/components/element-plus/date-picker.vue";
+import {
+  MyFormItem,
+  MyForm,
+  PkInput,
+  PkSelect,
+  PkOption,
+  MyButton,
+  MyDatePicker,
+} from "@/core/components/element-plus-proxy";
 import { Category, Task } from "@/components/ToDoApp/Task";
 import { toDoAppStore } from "@/components/ToDoApp/ToDoAppStore";
+import { sortTask } from "@/components/ToDoApp/sort-task";
+import { convertToCustomDate } from "@/components/ToDoApp/convert-to-custom-date";
 
-const emit = defineEmits(["rolledUp"])
+const emit = defineEmits(["rolledUp"]);
 const store = toDoAppStore();
-const options = ref<Category[]>([Category.normal,Category.important,Category.minor])
 
+const rolledUp = ref(true);
 const task = ref<Task>({
-    taskDescription: '',
+  taskDescription: "",
+  category: undefined,
+  date: undefined,
+  location: undefined,
+});
+const addTask = () => {
+  if (!task.value.taskDescription) {
+    alert("Description cant be empty");
+    return;
+  }
+  if (!store.taskArray) {
+    store.taskArray = [];
+  }
+  task.value = addNewTaskToFakeBackendDatabaseAndStoreArray(task.value);
+  expandAddTaskMenuSize(true);
+  store.taskArray = sortTask(store.taskArray);
+};
+const expandAddTaskMenuSize = (value: boolean) => {
+  rolledUp.value = value;
+  emit("rolledUp", rolledUp.value);
+};
+const addNewTaskToFakeBackendDatabaseAndStoreArray = (task: Task) => {
+  task.date = convertToCustomDate(task.date);
+  store.taskArray.push(task);
+  localStorage.setItem(localStorage.length.toString(), JSON.stringify(task));
+  return {
+    taskDescription: "",
     category: undefined,
     date: undefined,
-    location: undefined
-})
-const addTask = () =>{
-    if(!store.taskArray) {
-        store.taskArray = [];
-    }
-    task.value.date = convertToCustomDate(task.value.date);
-    store.taskArray.push(task.value);
-    task.value = {
-      taskDescription: '',
-      category: undefined,
-      date: undefined,
-      location: undefined
-    }
-    rolledUp.value = true;
-    store.sortArray();
-}
-function convertToCustomDate(dateString: string | undefined) {
-    if(!dateString) {
-        return undefined;
-    }
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day.toString().padStart(2, '0')}.${month.toString().padStart(2, '0')}.${year}`;
-}
-const rolledUp = ref(true);
-const expandAddTaskMenu = () => {
-    rolledUp.value = !rolledUp.value;
-    emit("rolledUp", rolledUp.value)
-}
-
-const formClasses = computed( () => ({
-    AddTask: true,
-    "AddTask__expandCreateTaskArea": !rolledUp.value,
-}))
-
-const containerClasses = computed( () => ({
-    "AddTask__container": true,
-    "AddTask__container--rolledUp": rolledUp.value,
-    "AddTask__container--expanded": !rolledUp.value,
-}))
+    location: undefined,
+  };
+};
+const formClasses = computed(() => ({
+  AddTask: true,
+  AddTask__expandCreateTaskArea: !rolledUp.value,
+}));
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .AddTask {
-    margin: 10px 0 0 10px;
+  margin: 10px 0 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-direction: column;
+  grid-gap: 10px;
+  background: #f0eeeb;
+  width: 500px;
+  height: 110px;
+  transition: 0.3s ease;
+
+  .el-form-item__label {
+    margin-left: 10px;
+  }
+  &__expandCreateTaskArea {
+    height: 255px;
+    width: 60%;
+    transition: 0.3s ease;
+  }
+
+  &__secondColumn {
     display: flex;
     flex-direction: column;
-    background: #f0eeeb;
-    width: 400px;
-    height: 150px;
-    transition: 0.3s ease;
+    height: 250px;
+    justify-content: space-between;
+  }
 
-    .el-form-item__label {
-        margin-left: 10px;
-    }
-    &__container {
-        display: grid;
-        width: 100%;
-        &--rolledUp {
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: auto;
-            grid-template-areas:
-            "taskDescription taskDescription addTaskButton ."
-            "moreDetails . . ."
-        }
-        &--expanded {
-            grid-template-columns: 3fr 1fr 1fr 1fr;
-            grid-template-rows: auto;
-            grid-template-areas:
-               "taskDescription taskDescription . ."
-               "category category date date"
-               "location location . ."
-               ". . addTaskButton addTaskButton"
-        }
-    }
-    &__taskDescription {
-        grid-area: taskDescription;
-        width: 50px;
-    }
+  &__taskDescription {
+    margin-bottom: 40px;
+    width: 100%;
+  }
 
-    &__category {
-        grid-area: category;
+  &__categoryForm {
+    margin-bottom: 40px;
+    &--categoryOptions {
+      width: 100%;
     }
+  }
 
-    &__moreDetails {
-        grid-area: moreDetails;
-    }
+  &__location {
+    margin-bottom: 40px;
+    width: 100%;
+  }
 
-    &__addTask {
-        grid-area: addTaskButton;
-    }
+  &__addTask {
+    margin-top: 35px;
+  }
 
-    &__dateInput {
-        grid-area: date;
-    }
-
-    &__location {
-        grid-area: location;
-    }
-
-    &__expandCreateTaskArea {
-        height: 163px;
-        width: 60%;
-        transition: 0.3s ease;
-    }
-
+  &__dateInput {
+    margin-top: 100px;
+  }
 }
 </style>

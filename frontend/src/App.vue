@@ -9,11 +9,9 @@ import ToDoPageView from "./components/ToDoApp/ToDoPageView.vue";
 export default defineComponent({
   name: "App",
   components: {
-      ToDoPageView,
+    ToDoPageView,
   },
 });
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
