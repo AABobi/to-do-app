@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { Task } from "@/components/ToDoApp/Task";
+import { Task } from "@/components/ToDoApp/task";
 
 interface Props {
   userTask: Task;

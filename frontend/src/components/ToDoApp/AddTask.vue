@@ -16,7 +16,7 @@
           class="AddTask__categoryForm--categoryOptions"
           v-model="task.category"
         >
-          <PkOption v-for="item in Category" :value="item"></PkOption>
+          <PkOption v-for="item in Category" :key="item" :label="item" :value="item"></PkOption>
         </PkSelect>
       </MyFormItem>
 
@@ -49,10 +49,11 @@ import {
   MyButton,
   MyDatePicker,
 } from "@/core/components/element-plus-proxy";
-import { Category, Task } from "@/components/ToDoApp/Task";
+import { Task } from "@/components/ToDoApp/task";
 import { toDoAppStore } from "@/components/ToDoApp/ToDoAppStore";
 import { sortTask } from "@/components/ToDoApp/sort-task";
 import { convertToCustomDate } from "@/components/ToDoApp/convert-to-custom-date";
+import { Category } from "@/components/ToDoApp/category";
 
 const emit = defineEmits(["rolledUp"]);
 const store = toDoAppStore();
@@ -77,23 +78,24 @@ const addTask = () => {
   store.taskArray = sortTask(store.taskArray);
 };
 const expandAddTaskMenuSize = (value: boolean) => {
-  rolledUp.value = value;
-  emit("rolledUp", rolledUp.value);
+   rolledUp.value = value;
+   emit("rolledUp", value);
 };
 const addNewTaskToFakeBackendDatabaseAndStoreArray = (task: Task) => {
-  task.date = convertToCustomDate(task.date);
-  store.taskArray.push(task);
-  localStorage.setItem(localStorage.length.toString(), JSON.stringify(task));
-  return {
-    taskDescription: "",
-    category: undefined,
-    date: undefined,
-    location: undefined,
-  };
+   task.date = convertToCustomDate(task.date);
+   store.taskArray.push(task);
+   localStorage.setItem(localStorage.length.toString(), JSON.stringify(task));
+   return {
+     taskDescription: "",
+     category: undefined,
+     date: undefined,
+     location: undefined,
+   };
 };
+
 const formClasses = computed(() => ({
   AddTask: true,
-  AddTask__expandCreateTaskArea: !rolledUp.value,
+  "AddTask__expandCreateTaskArea": !rolledUp.value,
 }));
 </script>
 <style scoped lang="scss">

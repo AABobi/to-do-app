@@ -1,4 +1,4 @@
-import { Task } from "@/components/ToDoApp/Task";
+import { Task } from "@/components/ToDoApp/task";
 
 export function sortTask(task: Task[] | undefined) {
   if (!task) {

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
-import { Task } from "@/components/ToDoApp/Task";
+import { Task } from "@/components/ToDoApp/task";
 import { sortTask } from "@/components/ToDoApp/sort-task";
 
 export const toDoAppStore = defineStore("toDoAppStore", () => {
