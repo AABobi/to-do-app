@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import HeaderHeadline from "@/components/ToDoApp/HeaderHeadline.vue";
-import { toDoAppStore } from "@/components/ToDoApp/ToDoAppStore";
+import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
 
 const store = toDoAppStore();
 const clearLocalStorage = () => {

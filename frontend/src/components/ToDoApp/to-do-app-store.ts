@@ -10,9 +10,6 @@ export const toDoAppStore = defineStore("toDoAppStore", () => {
   const taskArray = ref<Task[]>([]);
 
   const rewriteLocalStorageDataToStore = () => {
-    if (localStorage.length === 0) {
-      taskArray.value = [];
-    }
     for (let i = 0; i < localStorage.length; i++) {
       const localStorageItem = localStorage.getItem(i.toString());
       if (localStorageItem) {

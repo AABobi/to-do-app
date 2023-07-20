@@ -50,7 +50,7 @@ import {
   MyDatePicker,
 } from "@/core/components/element-plus-proxy";
 import { Task } from "@/components/ToDoApp/task";
-import { toDoAppStore } from "@/components/ToDoApp/ToDoAppStore";
+import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
 import { sortTask } from "@/components/ToDoApp/sort-task";
 import { convertToCustomDate } from "@/components/ToDoApp/convert-to-custom-date";
 import { Category } from "@/components/ToDoApp/category";
@@ -70,10 +70,8 @@ const addTask = () => {
     alert("Description cant be empty");
     return;
   }
-  if (!store.taskArray) {
-    store.taskArray = [];
-  }
-  task.value = addNewTaskToFakeBackendDatabaseAndStoreArray(task.value);
+  addNewTaskToFakeBackendAndStoreArray();
+  task.value = clearTask()
   expandAddTaskMenuSize(true);
   store.taskArray = sortTask(store.taskArray);
 };
@@ -81,17 +79,19 @@ const expandAddTaskMenuSize = (value: boolean) => {
    rolledUp.value = value;
    emit("rolledUp", value);
 };
-const addNewTaskToFakeBackendDatabaseAndStoreArray = (task: Task) => {
-   task.date = convertToCustomDate(task.date);
-   store.taskArray.push(task);
-   localStorage.setItem(localStorage.length.toString(), JSON.stringify(task));
-   return {
-     taskDescription: "",
-     category: undefined,
-     date: undefined,
-     location: undefined,
-   };
+const addNewTaskToFakeBackendAndStoreArray = () => {
+   task.value.date = convertToCustomDate(task.value.date);
+   store.taskArray.push(task.value);
+   localStorage.setItem(localStorage.length.toString(), JSON.stringify(task.value));
 };
+const clearTask = () => {
+    return {
+        taskDescription: "",
+        category: undefined,
+        date: undefined,
+        location: undefined,
+    }
+}
 
 const formClasses = computed(() => ({
   AddTask: true,

@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import UserTask from "@/components/ToDoApp/UserTask.vue";
-import { toDoAppStore } from "@/components/ToDoApp/ToDoAppStore";
+import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
 import { Task } from "@/components/ToDoApp/task";
 
 const store = toDoAppStore();
