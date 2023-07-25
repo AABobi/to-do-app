@@ -1,8 +1,13 @@
-export function convertToCustomDate(dateString: string | undefined) {
-  if (!dateString) {
-    return undefined;
+export function convertToCustomDate(unknowDate: string | undefined | Date) {
+  if (!unknowDate) {
+    return ;
   }
-  const date = new Date(dateString);
+  let date;
+  if (typeof unknowDate === 'string') {
+     date = new Date(unknowDate);
+  } else {
+     date = unknowDate;
+  }
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();

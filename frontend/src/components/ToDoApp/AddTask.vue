@@ -2,7 +2,7 @@
   <MyForm label-position="top" :class="formClasses">
     <div>
       <MyFormItem label="DESCRIPTION" class="AddTask__taskDescription">
-        <PkInput v-model="task.taskDescription"></PkInput>
+        <PkInput v-model="newTask.taskDescription"></PkInput>
       </MyFormItem>
       <MyFormItem v-if="rolledUp">
         <MyButton @click="expandAddTaskMenuSize(false)">MORE DETAILS</MyButton>
@@ -14,19 +14,19 @@
       >
         <PkSelect
           class="AddTask__categoryForm--categoryOptions"
-          v-model="task.category"
+          v-model="newTask.category"
         >
           <PkOption v-for="item in Category" :key="item" :label="item" :value="item"></PkOption>
         </PkSelect>
       </MyFormItem>
 
       <MyFormItem v-if="!rolledUp" label="LOCATION" class="AddTask__location">
-        <PkInput v-model="task.location"></PkInput>
+        <PkInput v-model="newTask.location"></PkInput>
       </MyFormItem>
     </div>
     <div class="AddTask__secondColumn">
       <MyFormItem v-if="!rolledUp" class="AddTask__dateInput">
-        <MyDatePicker v-model="task.date"></MyDatePicker>
+        <MyDatePicker v-model="newTask.date"></MyDatePicker>
       </MyFormItem>
       <MyFormItem v-if="!rolledUp">
         <MyButton @click="addTask()">add</MyButton>
@@ -49,49 +49,27 @@ import {
   MyButton,
   MyDatePicker,
 } from "@/core/components/element-plus-proxy";
-import { Task } from "@/components/ToDoApp/task";
 import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
-import { sortTask } from "@/components/ToDoApp/sort-task";
-import { convertToCustomDate } from "@/components/ToDoApp/convert-to-custom-date";
 import { Category } from "@/components/ToDoApp/category";
 
 const emit = defineEmits(["rolledUp"]);
 const store = toDoAppStore();
 
 const rolledUp = ref(true);
-const task = ref<Task>({
-  taskDescription: "",
-  category: undefined,
-  date: undefined,
-  location: undefined,
-});
+const newTask = computed( () => store.task)
+
 const addTask = () => {
-  if (!task.value.taskDescription) {
+  if (!newTask.value.taskDescription) {
     alert("Description cant be empty");
     return;
   }
-  addNewTaskToFakeBackendAndStoreArray();
-  task.value = clearTask()
-  expandAddTaskMenuSize(true);
-  store.taskArray = sortTask(store.taskArray);
+    store.pushNewTask();
+    expandAddTaskMenuSize(true);
 };
 const expandAddTaskMenuSize = (value: boolean) => {
    rolledUp.value = value;
    emit("rolledUp", value);
 };
-const addNewTaskToFakeBackendAndStoreArray = () => {
-   task.value.date = convertToCustomDate(task.value.date);
-   store.taskArray.push(task.value);
-   localStorage.setItem(localStorage.length.toString(), JSON.stringify(task.value));
-};
-const clearTask = () => {
-    return {
-        taskDescription: "",
-        category: undefined,
-        date: undefined,
-        location: undefined,
-    }
-}
 
 const formClasses = computed(() => ({
   AddTask: true,

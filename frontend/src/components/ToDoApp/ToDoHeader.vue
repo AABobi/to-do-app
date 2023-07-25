@@ -3,7 +3,7 @@
     <HeaderHeadline
       class="ToDoHeader__headLine"
       title="REMOVE ALL TASKS"
-      @click="clearLocalStorage"
+      @click="clearStorage"
     ></HeaderHeadline>
   </header>
 </template>
@@ -13,9 +13,8 @@ import HeaderHeadline from "@/components/ToDoApp/HeaderHeadline.vue";
 import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
 
 const store = toDoAppStore();
-const clearLocalStorage = () => {
-  localStorage.clear();
-  store.rewriteLocalStorageDataToStore();
+const clearStorage = () => {
+    store.clearLocalStorage();
 };
 </script>
 

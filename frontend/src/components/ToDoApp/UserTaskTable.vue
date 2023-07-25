@@ -1,10 +1,10 @@
 <template>
   <div class="UserTaskTable">
-    <div v-for="list in store.taskArray">
+    <div v-for="task in store.taskArray">
       <UserTask
         class="UserTaskTable__task"
-        :user-task="list"
-        @click="removeTask(list)"
+        :user-task="task"
+        @click="remove(task)"
       ></UserTask>
     </div>
   </div>
@@ -16,14 +16,8 @@ import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
 import { Task } from "@/components/ToDoApp/task";
 
 const store = toDoAppStore();
-const removeTask = (list: Task) => {
-  store.taskArray = store.taskArray.filter((item) => item !== list);
-
-  //This is horrible, but there is no normal back just localStorage
-  localStorage.clear();
-  for (let obj of store.taskArray) {
-    localStorage.setItem(localStorage.length.toString(), JSON.stringify(obj));
-  }
+const remove = (task: Task) => {
+     store.removeTask(task);
 };
 </script>
 

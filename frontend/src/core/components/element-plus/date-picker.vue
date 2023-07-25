@@ -18,9 +18,7 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue"]);
 const date = computed({
   get: () => props.modelValue,
-  set: (v) => {
-    emit("update:modelValue", v);
-  },
+  set: (v) => emit("update:modelValue", v)
 });
 </script>
 <style lang="scss">
