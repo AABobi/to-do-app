@@ -1,8 +1,7 @@
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
 import { Task } from "@/components/ToDoApp/task";
-import { sortTask } from "@/components/ToDoApp/sort-task";
-import {convertToCustomDate} from "@/components/ToDoApp/convert-to-custom-date";
+import { GeneratedFakeApi } from "@/components/FakeApi/GeneratedFakeApi";
 
 export const toDoAppStore = defineStore("toDoAppStore", () => {
   const taskArray = ref<Task[]>([]);
@@ -13,52 +12,33 @@ export const toDoAppStore = defineStore("toDoAppStore", () => {
     location: undefined,
   });
 
+  const theRealFakeApi = new GeneratedFakeApi();
+
   const pushNewTask = () => {
-    task.value.date = convertToCustomDate(task.value.date);
-
-    taskArray.value.push(task.value);
-    localStorage.setItem(localStorage.length.toString(), JSON.stringify(task.value));
-
+    taskArray.value = theRealFakeApi.addNewTaskToDataBase(task.value);
     task.value = {
       taskDescription: "",
       category: undefined,
       date: undefined,
       location: undefined,
     }
-
-    sortTask(taskArray.value);
   }
 
   const removeTask = (task: Task) => {
-    taskArray.value = taskArray.value.filter((item) => item !== task);
-
-    //This is horrible, but there is no normal back just localStorage
-    localStorage.clear();
-    for (let obj of taskArray.value) {
-      localStorage.setItem(localStorage.length.toString(), JSON.stringify(obj));
-    }
+    console.log("test")
+    taskArray.value = theRealFakeApi.deleteTask(task,taskArray.value)
   }
 
   const clearLocalStorage = () => {
     localStorage.clear();
-    rewriteLocalStorageDataToStore();
+    taskArray.value = theRealFakeApi.getTasks();
   }
-  const rewriteLocalStorageDataToStore = () => {
-    for (let i = 0; i < localStorage.length; i++) {
-      const localStorageItem = localStorage.getItem(i.toString());
-      if (localStorageItem) {
-        taskArray.value.push(JSON.parse(localStorageItem));
-      }
-    }
-    taskArray.value = sortTask(taskArray.value);
-  };
 
   onMounted(() => {
-    rewriteLocalStorageDataToStore();
+    taskArray.value = theRealFakeApi.getTasks()
   });
 
   return {
-    rewriteLocalStorageDataToStore,
     taskArray,
     pushNewTask,
     task,

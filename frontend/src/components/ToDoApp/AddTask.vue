@@ -16,7 +16,7 @@
           class="AddTask__categoryForm--categoryOptions"
           v-model="newTask.category"
         >
-          <PkOption v-for="item in Category" :key="item" :label="item" :value="item"></PkOption>
+          <PkOption v-for="item in Category" :key="item" :label="item" :value="item"/>
         </PkSelect>
       </MyFormItem>
 
