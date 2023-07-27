@@ -9,9 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import ToDoHeader from "@/components/ToDoApp/ToDoHeader.vue";
-import AddTask from "@/components/ToDoApp/AddTask.vue";
-import UserTaskTable from "@/components/ToDoApp/UserTaskTable.vue";
+import ToDoHeader from "@/components/ToDoApp/components/ToDoHeader.vue";
+import AddTask from "@/components/ToDoApp/components/AddTask.vue";
+import UserTaskTable from "@/components/ToDoApp/components/UserTaskTable.vue";
 import { computed, ref } from "vue";
 
 const rolledUp = ref(true);

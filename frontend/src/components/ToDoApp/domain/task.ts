@@ -1,4 +1,4 @@
-import { Category } from "@/components/ToDoApp/category";
+import { Category } from "@/components/ToDoApp/domain/category";
 
 export interface Task {
   taskDescription: string;

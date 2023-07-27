@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
-import { Task } from "@/components/ToDoApp/task";
+import { Task } from "@/components/ToDoApp/domain/task";
 import { GeneratedFakeApi } from "@/components/FakeApi/GeneratedFakeApi";
 
 export const toDoAppStore = defineStore("toDoAppStore", () => {
@@ -25,7 +25,6 @@ export const toDoAppStore = defineStore("toDoAppStore", () => {
   }
 
   const removeTask = (task: Task) => {
-    console.log("test")
     taskArray.value = theRealFakeApi.deleteTask(task,taskArray.value)
   }
 

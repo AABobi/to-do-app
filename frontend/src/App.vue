@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ToDoPageView from "./components/ToDoApp/ToDoPageView.vue";
+import ToDoPageView from "./components/ToDoApp/components/ToDoPageView.vue";
 
 export default defineComponent({
   name: "App",

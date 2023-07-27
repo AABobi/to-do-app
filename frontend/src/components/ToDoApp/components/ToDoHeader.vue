@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import HeaderHeadline from "@/components/ToDoApp/HeaderHeadline.vue";
-import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
+import HeaderHeadline from "@/components/ToDoApp/components/HeaderHeadline.vue";
+import { toDoAppStore } from "@/components/ToDoApp/stores/to-do-app-store";
 
 const store = toDoAppStore();
 const clearStorage = () => {

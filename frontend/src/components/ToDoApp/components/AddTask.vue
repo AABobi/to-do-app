@@ -49,8 +49,8 @@ import {
   MyButton,
   MyDatePicker,
 } from "@/core/components/element-plus-proxy";
-import { toDoAppStore } from "@/components/ToDoApp/to-do-app-store";
-import { Category } from "@/components/ToDoApp/category";
+import { toDoAppStore } from "@/components/ToDoApp/stores/to-do-app-store";
+import { Category } from "@/components/ToDoApp/domain/category";
 
 const emit = defineEmits(["rolledUp"]);
 const store = toDoAppStore();

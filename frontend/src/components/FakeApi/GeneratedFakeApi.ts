@@ -1,6 +1,6 @@
-import {Task} from "@/components/ToDoApp/task";
-import {convertToCustomDate} from "@/components/ToDoApp/convert-to-custom-date";
-import {sortTask} from "@/components/ToDoApp/sort-task";
+import {Task} from "@/components/ToDoApp/domain/task";
+import {convertToCustomDate} from "@/components/ToDoApp/domain/convert-to-custom-date";
+import {sortTask} from "@/components/ToDoApp/domain/sort-task";
 
 export class GeneratedFakeApi {
 
