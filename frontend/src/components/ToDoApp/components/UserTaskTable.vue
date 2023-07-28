@@ -17,7 +17,6 @@ import { Task } from "@/components/ToDoApp/domain/task";
 
 const store = toDoAppStore();
 const remove = (task: Task) => {
-    console.log("table")
      store.removeTask(task);
 };
 </script>

@@ -22,7 +22,7 @@ export class GeneratedFakeApi {
                 tasks.push(task)
             }
         }
-        sortTask(tasks);
+
         return tasks;
     }
 

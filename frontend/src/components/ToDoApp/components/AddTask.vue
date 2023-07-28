@@ -54,7 +54,6 @@ import { Category } from "@/components/ToDoApp/domain/category";
 
 const emit = defineEmits(["rolledUp"]);
 const store = toDoAppStore();
-
 const rolledUp = ref(true);
 const newTask = computed( () => store.task)
 

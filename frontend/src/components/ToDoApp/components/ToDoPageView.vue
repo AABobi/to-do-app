@@ -1,7 +1,7 @@
 <template>
   <div class="ToDoPageView">
     <div :class="classes">
-      <ToDoHeader></ToDoHeader>
+      <ToDoHeader title="REMOVE ALL TASKS"></ToDoHeader>
       <AddTask @rolled-up="expandMenu"></AddTask>
       <UserTaskTable class="ToDoPageView__table"></UserTaskTable>
     </div>

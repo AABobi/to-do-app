@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
 import { Task } from "@/components/ToDoApp/domain/task";
 import { GeneratedFakeApi } from "@/components/FakeApi/GeneratedFakeApi";
+import {sortTask} from "@/components/ToDoApp/domain/sort-task";
 
 export const toDoAppStore = defineStore("toDoAppStore", () => {
   const taskArray = ref<Task[]>([]);
@@ -22,10 +23,12 @@ export const toDoAppStore = defineStore("toDoAppStore", () => {
       date: undefined,
       location: undefined,
     }
+    sortTask(taskArray.value);
   }
 
   const removeTask = (task: Task) => {
     taskArray.value = theRealFakeApi.deleteTask(task,taskArray.value)
+    sortTask(taskArray.value);
   }
 
   const clearLocalStorage = () => {
@@ -35,6 +38,7 @@ export const toDoAppStore = defineStore("toDoAppStore", () => {
 
   onMounted(() => {
     taskArray.value = theRealFakeApi.getTasks()
+    sortTask(taskArray.value);
   });
 
   return {
