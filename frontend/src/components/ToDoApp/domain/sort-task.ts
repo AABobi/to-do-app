@@ -1,26 +1,26 @@
 import { Task } from "@/components/ToDoApp/domain/task";
+function createDate(dateStr: string): Date {
+  const [day, month, year] = dateStr.split('.').map(Number);
+  return new Date(year, month - 1, day);
+}
 
 export function sortTask(task: Task[] | undefined) {
   if (!task) {
     return [];
   }
-  const currentDate = new Date();
-  task.sort((a, b) => {
-    if (!a.date && !b.date) {
-      return 0;
-    } else if (!a.date) {
-      return 1;
-    } else if (!b.date) {
+  task.sort((taskA,taskB) => {
+    if (taskA.date && taskB.date) {
+      const dateA = createDate(taskA.date);
+      const dateB = createDate(taskB.date);
+      return dateA.getTime() - dateB.getTime();
+    } else if (taskA.date) {
       return -1;
+    } else if (taskB.date) {
+      return 1;
     }
-
-    const dateA = new Date(a.date.split(".").reverse().join("-"));
-    const dateB = new Date(b.date.split(".").reverse().join("-"));
-
-    const diffA = Math.abs(dateA.getTime() - currentDate.getTime());
-    const diffB = Math.abs(dateB.getTime() - currentDate.getTime());
-    return diffA - diffB;
+    return 0;
   });
+
   const priorityOrder = ["IMPORTANT", "NORMAL", "MINOR"];
   task.sort((a, b) => {
     if (a.date === b.date) {

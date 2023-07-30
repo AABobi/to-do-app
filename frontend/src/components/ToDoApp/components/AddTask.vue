@@ -2,7 +2,7 @@
   <MyForm label-position="top" :class="formClasses">
     <div>
       <MyFormItem label="DESCRIPTION" class="AddTask__taskDescription">
-        <PkInput v-model="newTask.taskDescription"></PkInput>
+        <MyInput v-model="newTask.taskDescription"></MyInput>
       </MyFormItem>
       <MyFormItem v-if="rolledUp">
         <MyButton @click="expandAddTaskMenuSize(false)">MORE DETAILS</MyButton>
@@ -12,16 +12,16 @@
         label="CATEGORY"
         class="AddTask__categoryForm"
       >
-        <PkSelect
+        <MySelect
           class="AddTask__categoryForm--categoryOptions"
           v-model="newTask.category"
         >
-          <PkOption v-for="item in Category" :key="item" :label="item" :value="item"/>
-        </PkSelect>
+          <MyOption v-for="item in Category" :key="item" :label="item" :value="item"/>
+        </MySelect>
       </MyFormItem>
 
       <MyFormItem v-if="!rolledUp" label="LOCATION" class="AddTask__location">
-        <PkInput v-model="newTask.location"></PkInput>
+        <MyInput v-model="newTask.location"></MyInput>
       </MyFormItem>
     </div>
     <div class="AddTask__secondColumn">
@@ -43,9 +43,9 @@ import { computed, ref } from "vue";
 import {
   MyFormItem,
   MyForm,
-  PkInput,
-  PkSelect,
-  PkOption,
+  MyInput,
+  MySelect,
+  MyOption,
   MyButton,
   MyDatePicker,
 } from "@/core/components/element-plus-proxy";
@@ -58,13 +58,14 @@ const rolledUp = ref(true);
 const newTask = computed( () => store.task)
 
 const addTask = () => {
-  if (!newTask.value.taskDescription) {
+  if (!newTask.value!.taskDescription!) {
     alert("Description cant be empty");
     return;
   }
     store.pushNewTask();
     expandAddTaskMenuSize(true);
 };
+
 const expandAddTaskMenuSize = (value: boolean) => {
    rolledUp.value = value;
    emit("rolledUp", value);

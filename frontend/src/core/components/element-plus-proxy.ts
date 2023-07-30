@@ -2,8 +2,8 @@ export { default as MyDatePicker } from "@/core/components/element-plus/date-pic
 export {
   ElForm as MyForm,
   ElFormItem as MyFormItem,
-  ElInput as PkInput,
-  ElSelect as PkSelect,
-  ElOption as PkOption,
+  ElInput as MyInput,
+  ElSelect as MySelect,
+  ElOption as MyOption,
   ElButton as MyButton,
 } from "element-plus";
